@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace ClubhouseDotNet
 {
-    public class CreateChannelResponse : ClubhouseResponse
+    public class CreateChannelResponse : ClubhouseResponse, IPubnubConfig
     {
         [JsonPropertyName("creator_user_profile_id")]
         public long CreatorUserProfileId { get; set; }
@@ -69,10 +69,10 @@ namespace ClubhouseDotNet
         public string PubnubOrigin { get; set; }
 
         [JsonPropertyName("pubnub_heartbeat_value")]
-        public long PubnubHeartbeatValue { get; set; }
+        public int PubnubHeartbeatValue { get; set; }
 
         [JsonPropertyName("pubnub_heartbeat_interval")]
-        public long PubnubHeartbeatInterval { get; set; }
+        public int PubnubHeartbeatInterval { get; set; }
 
         [JsonPropertyName("pubnub_enable")]
         public bool PubnubEnable { get; set; }
