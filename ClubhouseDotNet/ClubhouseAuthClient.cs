@@ -33,7 +33,29 @@ namespace ClubhouseDotNet
 
         public async Task<StartPhoneNumberResponse> StartPhoneNumberAuthAsync(string phoneNumber)
         {
-            var response = await _client.PostAsJsonAsync("/api/start_phone_number_auth", new StartPhoneNumberAuthRequest
+            var response = await _client.PostAsJsonAsync("/api/start_phone_number_auth", new PhoneNumberAuthRequest
+            {
+                PhoneNumber = phoneNumber
+            });
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<StartPhoneNumberResponse>();
+        }
+
+        public async Task<StartPhoneNumberResponse> CallPhoneNumberAuthAsync(string phoneNumber)
+        {
+            var response = await _client.PostAsJsonAsync("/api/call_phone_number_auth", new PhoneNumberAuthRequest
+            {
+                PhoneNumber = phoneNumber
+            });
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<StartPhoneNumberResponse>();
+        }
+
+        public async Task<StartPhoneNumberResponse> ResendPhoneNumberAuthAsync(string phoneNumber)
+        {
+            var response = await _client.PostAsJsonAsync("/api/resend_phone_number_auth", new PhoneNumberAuthRequest
             {
                 PhoneNumber = phoneNumber
             });

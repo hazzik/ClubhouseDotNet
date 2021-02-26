@@ -2,7 +2,7 @@
 
 namespace ClubhouseDotNet
 {
-    public class StartPhoneNumberAuthRequest
+    public class PhoneNumberAuthRequest
     {
         [JsonPropertyName("phone_number")]
         public string PhoneNumber { get; set; }

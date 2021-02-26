@@ -34,6 +34,14 @@ namespace ClubhouseDotNet
             //_client.DefaultRequestHeaders.Add("Cookie", $"__cfduid={secrets.token_hex(21)}{random.randint(1, 9)}");
         }
 
+        public async Task<MeResponse> Me(bool returnFollowingIds=false, bool returnBlockedIds=false, string timezoneIdentifier="Asia/Tokyo")
+        {
+            var response = await _client.PostAsJsonAsync("/api/me", new MeRequest {ReturnFollowingIds = returnFollowingIds, ReturnBlockedIds = returnBlockedIds, TimezoneIdentifier = timezoneIdentifier});
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<MeResponse>();
+        }
+
         public async Task<ChannelList> GetChannelsAsync()
         {
             var response = await _client.GetAsync("/api/get_channels");
