@@ -278,6 +278,7 @@ namespace ClubhouseDotNet
                 user_id = userId
             });
 
+            var r = await response.Content.ReadAsStringAsync();
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
@@ -332,6 +333,30 @@ namespace ClubhouseDotNet
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<RefreshTokenResponse>();
+        }
+
+        public async Task<UserList> GetFollowersAsync(long userId, int page = 1, int pageSize = 50)
+        {
+            var response = await _client.GetAsync($"/api/get_followers?user_id={userId}&page_size={pageSize}&page={page}");
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<UserList>();
+        }
+
+        public async Task<UserList> GetFollowingAsync(long userId, int page = 1, int pageSize = 50)
+        {
+            var response = await _client.GetAsync($"/api/get_following?user_id={userId}&page_size={pageSize}&page={page}");
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<UserList>();
+        }
+
+        public async Task<UserList> GetMutualFollowsAsync(long userId, int page = 1, int pageSize = 50)
+        {
+            var response = await _client.GetAsync($"/api/get_mutual_follows?user_id={userId}&page_size={pageSize}&page={page}");
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<UserList>();
         }
     }
 }
