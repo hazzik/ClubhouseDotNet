@@ -36,10 +36,24 @@ namespace ClubhouseDotNet
 
         public async Task<MeResponse> Me(bool returnFollowingIds=false, bool returnBlockedIds=false, string timezoneIdentifier="Asia/Tokyo")
         {
-            var response = await _client.PostAsJsonAsync("/api/me", new MeRequest {ReturnFollowingIds = returnFollowingIds, ReturnBlockedIds = returnBlockedIds, TimezoneIdentifier = timezoneIdentifier});
+            var response = await _client.PostAsJsonAsync("/api/me", new MeRequest
+            {
+                ReturnFollowingIds = returnFollowingIds,
+                ReturnBlockedIds = returnBlockedIds,
+                TimezoneIdentifier = timezoneIdentifier
+            });
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<MeResponse>();
+        }
+
+
+        public async Task<ClubhouseResponse> UpdateBio(string bio)
+        {
+            var response = await _client.PostAsJsonAsync("/api/update_bio", new UpdateBioRequest {Bio = bio});
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
 
         public async Task<ChannelList> GetChannelsAsync()
@@ -278,7 +292,6 @@ namespace ClubhouseDotNet
                 user_id = userId
             });
 
-            var r = await response.Content.ReadAsStringAsync();
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
