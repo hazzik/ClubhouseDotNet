@@ -369,7 +369,7 @@ namespace ClubhouseDotNet
                 new ChangeHandraiseSettingsRequest
                 {
                     Channel = channel,
-                    IsEnabled = isEnabled, 
+                    IsEnabled = isEnabled,
                     HandraisePermission = (int) handraisePermission
                 });
 

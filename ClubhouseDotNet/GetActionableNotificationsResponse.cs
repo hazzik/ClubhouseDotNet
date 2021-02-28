@@ -5,6 +5,6 @@ namespace ClubhouseDotNet
     public class GetActionableNotificationsResponse : PagedClubhouseResponse
     {
         [JsonPropertyName("notifications")]
-        public object[] Notifications { get; set; }
+        public ActionableNotification[] Notifications { get; set; }
     }
 }

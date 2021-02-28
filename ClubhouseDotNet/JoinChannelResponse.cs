@@ -45,7 +45,7 @@ namespace ClubhouseDotNet
         public bool IsHandraiseEnabled { get; set; }
 
         [JsonPropertyName("handraise_permission")]
-        public long HandraisePermission { get; set; }
+        public HandraisePermission HandraisePermission { get; set; }
 
         [JsonPropertyName("is_club_member")]
         public bool IsClubMember { get; set; }
