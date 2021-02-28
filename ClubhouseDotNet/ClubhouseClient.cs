@@ -162,85 +162,57 @@ namespace ClubhouseDotNet
                 .Content.ReadFromJsonAsync<ActivePingResponse>();
         }
 
-        public async Task<ClubhouseResponse> InviteToExistingChannelAsync(string name, long userId )
+        public async Task<ClubhouseResponse> InviteToExistingChannelAsync(string channel, long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/invite_to_existing_channel", new 
-            {
-                channel = name,
-                user_id = userId
-            });
+            var response = await _client.PostAsJsonAsync("/api/invite_to_existing_channel", new ChannelUserRequest {Channel = channel, UserId = userId});
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<InviteToExistingChannelResponse>();
         }
 
-        public async Task<ClubhouseResponse> InviteToNewChannelAsync(string name, long userId )
+        public async Task<ClubhouseResponse> InviteToNewChannelAsync(string channel, long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/invite_to_new_channel", new 
-            {
-                channel = name,
-                user_id = userId
-            });
+            var response = await _client.PostAsJsonAsync("/api/invite_to_new_channel", new ChannelUserRequest {Channel = channel, UserId = userId});
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<InviteToNewChannelResponse>();
         }
 
-        public async Task<ClubhouseResponse> InviteSpeakerAsync(string name, long userId)
+        public async Task<ClubhouseResponse> InviteSpeakerAsync(string channel, long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/invite_speaker", new 
-            {
-                channel = name,
-                user_id = userId
-            });
+            var response = await _client.PostAsJsonAsync("/api/invite_speaker", new ChannelUserRequest {Channel = channel, UserId = userId});
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
 
-        public async Task<ClubhouseResponse> UnInviteSpeakerAsync(string name, long userId)
+        public async Task<ClubhouseResponse> UnInviteSpeakerAsync(string channel, long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/uninvite_speaker", new 
-            {
-                channel = name,
-                user_id = userId
-            });
+            var response = await _client.PostAsJsonAsync("/api/uninvite_speaker", new ChannelUserRequest {Channel = channel, UserId = userId});
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
 
-        public async Task<ClubhouseResponse> MuteSpeakerAsync(string name, long userId)
+        public async Task<ClubhouseResponse> MuteSpeakerAsync(string channel, long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/mute_speaker", new 
-            {
-                channel = name,
-                user_id = userId
-            });
+            var response = await _client.PostAsJsonAsync("/api/mute_speaker", new ChannelUserRequest {Channel = channel, UserId = userId});
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
         
-        public async Task<ClubhouseResponse> MakeModeratorAsync(string name, long userId)
+        public async Task<ClubhouseResponse> MakeModeratorAsync(string channel, long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/make_moderator", new 
-            {
-                channel = name,
-                user_id = userId
-            });
+            var response = await _client.PostAsJsonAsync("/api/make_moderator", new ChannelUserRequest {Channel = channel, UserId = userId});
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
 
-        public async Task<AcceptSpeakerInviteResponse> AcceptSpeakerInviteAsync(string name, long userId)
+        public async Task<AcceptSpeakerInviteResponse> AcceptSpeakerInviteAsync(string channel, long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/accept_speaker_invite", new 
-            {
-                channel = name,
-                user_id = userId
-            });
+            var response = await _client.PostAsJsonAsync("/api/accept_speaker_invite", new ChannelUserRequest {Channel = channel, UserId = userId});
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<AcceptSpeakerInviteResponse>();
@@ -258,25 +230,17 @@ namespace ClubhouseDotNet
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
 
-        public async Task<ClubhouseResponse> RejectSpeakerInviteAsync(string name, long userId)
+        public async Task<ClubhouseResponse> RejectSpeakerInviteAsync(string channel, long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/reject_speaker_invite", new 
-            {
-                channel = name,
-                user_id = userId
-            });
+            var response = await _client.PostAsJsonAsync("/api/reject_speaker_invite", new ChannelUserRequest {Channel = channel, UserId = userId});
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
 
-        public async Task<ClubhouseResponse> BlockFromChannelAsync(string name, long userId)
+        public async Task<ClubhouseResponse> BlockFromChannelAsync(string channel, long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/block_from_channel", new 
-            {
-                channel = name,
-                user_id = userId
-            });
+            var response = await _client.PostAsJsonAsync("/api/block_from_channel", new ChannelUserRequest {Channel = channel, UserId = userId});
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
@@ -298,9 +262,9 @@ namespace ClubhouseDotNet
 
         public async Task<ClubhouseResponse> UnFollowAsync(long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/unfollow", new
+            var response = await _client.PostAsJsonAsync("/api/unfollow", new UserRequest
             {
-                user_id = userId
+                UserId = userId
             });
 
             return await response.EnsureSuccessStatusCode()
@@ -309,9 +273,9 @@ namespace ClubhouseDotNet
 
         public async Task<ClubhouseResponse> BlockAsync(long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/block", new
+            var response = await _client.PostAsJsonAsync("/api/block", new UserRequest
             {
-                user_id = userId
+                UserId = userId
             });
 
             return await response.EnsureSuccessStatusCode()
@@ -320,9 +284,9 @@ namespace ClubhouseDotNet
 
         public async Task<ClubhouseResponse> UnBlockAsync(long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/unblock", new
+            var response = await _client.PostAsJsonAsync("/api/unblock", new UserRequest
             {
-                user_id = userId
+                UserId = userId
             });
 
             return await response.EnsureSuccessStatusCode()
@@ -374,14 +338,27 @@ namespace ClubhouseDotNet
 
         public async Task<GetProfileResponse> GetProfileAsync(long userId)
         {
-            var response = await _client.PostAsJsonAsync("/api/get_profile",
-                new
-                {
-                    user_id = userId
-                });
+            var response = await _client.PostAsJsonAsync("/api/get_profile", new UserRequest
+            {
+                UserId = userId
+            });
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<GetProfileResponse>();
+        }
+
+        public async Task<ClubhouseResponse> ChangeHandraiseSettingsAsync(string channel, bool isEnabled=true, HandraisePermission handraisePermission=HandraisePermission.Everyone)
+        {
+            var response = await _client.PostAsJsonAsync("/api/change_handraise_settings",
+                new ChangeHandraiseSettingsRequest
+                {
+                    Channel = channel,
+                    IsEnabled = isEnabled, 
+                    HandraisePermission = (int) handraisePermission
+                });
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
     }
 }
