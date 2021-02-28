@@ -63,7 +63,7 @@ namespace ClubhouseDotNet
         public string RtmToken { get; set; }
 
         [JsonPropertyName("pubnub_token")]
-        public Guid PubnubToken { get; set; }
+        public string PubnubToken { get; set; }
 
         [JsonPropertyName("pubnub_origin")]
         public string PubnubOrigin { get; set; }

@@ -4,9 +4,9 @@ namespace ClubhouseDotNet
 {
     public interface IPubnubConfig
     {
-        Guid PubnubToken { get; set; }
-        string PubnubOrigin { get; set; }
-        int PubnubHeartbeatValue { get; set; }
-        int PubnubHeartbeatInterval { get; set; }
+        string PubnubToken { get; }
+        string PubnubOrigin { get; }
+        int PubnubHeartbeatValue { get; }
+        int PubnubHeartbeatInterval { get; }
     }
 }
