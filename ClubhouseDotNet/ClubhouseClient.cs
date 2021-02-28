@@ -293,6 +293,14 @@ namespace ClubhouseDotNet
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
 
+        public async Task<GetNotificationsResponse> GetNotificationsAsync(int page = 1, int pageSize = 50)
+        {
+            var response = await _client.GetAsync($"/api/get_notifications?page_size={pageSize}&page={page}");
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<GetNotificationsResponse>();
+        }
+
         public async Task<ClubhouseResponse> GetActionableNotificationsAsync()
         {
             var response = await _client.GetAsync("/api/get_actionable_notifications");
