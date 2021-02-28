@@ -371,5 +371,17 @@ namespace ClubhouseDotNet
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<UserList>();
         }
+
+        public async Task<GetProfileResponse> GetProfileAsync(long userId)
+        {
+            var response = await _client.PostAsJsonAsync("/api/get_profile",
+                new
+                {
+                    user_id = userId
+                });
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<GetProfileResponse>();
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace ClubhouseDotNet
 {
-    public partial class ChannelList : ClubhouseResponse
+    public class ChannelList : ClubhouseResponse
     {
         [JsonPropertyName("channels")]
         public Channel[] Channels { get; set; }

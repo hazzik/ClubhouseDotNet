@@ -2,7 +2,7 @@
 
 namespace ClubhouseDotNet
 {
-    public partial class GetActionableNotificationsResponse : ClubhouseResponse
+    public class GetActionableNotificationsResponse : ClubhouseResponse
     {
         [JsonPropertyName("notifications")]
         public object[] Notifications { get; set; }

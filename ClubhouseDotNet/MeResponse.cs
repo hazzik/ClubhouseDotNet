@@ -26,7 +26,7 @@ namespace ClubhouseDotNet
         public bool NotificationsEnabled { get; set; }
 
         [JsonPropertyName("user_profile")]
-        public UserProfile UserProfile { get; set; }
+        public UserProfileInfo UserProfile { get; set; }
 
         [JsonPropertyName("following_ids")]
         public long[] FollowingIds { get; set; }

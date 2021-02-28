@@ -2,7 +2,7 @@
 
 namespace ClubhouseDotNet
 {
-    public partial class CreateChannelRequest
+    public class CreateChannelRequest
     {
         [JsonPropertyName("is_social_mode")]
         public bool IsSocialMode { get; set; }
