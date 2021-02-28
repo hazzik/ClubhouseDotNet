@@ -30,13 +30,13 @@ namespace ClubhouseDotNet
         public string[] FeatureFlags { get; set; }
 
         [JsonPropertyName("club")]
-        public object Club { get; set; }
+        public Club Club { get; set; }
 
         [JsonPropertyName("club_name")]
-        public object ClubName { get; set; }
+        public string ClubName { get; set; }
 
         [JsonPropertyName("club_id")]
-        public object ClubId { get; set; }
+        public long? ClubId { get; set; }
 
         [JsonPropertyName("welcome_for_user_profile")]
         public object WelcomeForUserProfile { get; set; }
