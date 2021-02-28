@@ -34,7 +34,7 @@ namespace ClubhouseDotNet
             //_client.DefaultRequestHeaders.Add("Cookie", $"__cfduid={secrets.token_hex(21)}{random.randint(1, 9)}");
         }
 
-        public async Task<MeResponse> Me(bool returnFollowingIds=false, bool returnBlockedIds=false, string timezoneIdentifier="Asia/Tokyo")
+        public async Task<MeResponse> MeAsync(bool returnFollowingIds=false, bool returnBlockedIds=false, string timezoneIdentifier="Asia/Tokyo")
         {
             var response = await _client.PostAsJsonAsync("/api/me", new MeRequest
             {
@@ -342,6 +342,14 @@ namespace ClubhouseDotNet
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<UserList>();
+        }
+
+        public async Task<GetOnlineFriendsResponse> GetOnlineFriendsAsync()
+        {
+            var response = await _client.PostAsJsonAsync("/api/get_online_friends", new { });
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<GetOnlineFriendsResponse>();
         }
 
         public async Task<GetProfileResponse> GetProfileAsync(long userId)
