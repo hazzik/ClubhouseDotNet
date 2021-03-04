@@ -56,9 +56,10 @@ namespace ClubhouseDotNet
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
 
-        public async Task<GetEventsResponse> GetEventsAsync()
+        public async Task<GetEventsResponse> GetEventsAsync(bool isFiltered = true, int page = 1, int pageSize = 25)
         {
-            var response = await _client.GetAsync("/api/get_events");
+            var response = await _client.GetAsync(
+                $"/api/get_events?is_filtered={(isFiltered ? "true" : "false")}&page_size={pageSize}&page={page}");
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<GetEventsResponse>();
