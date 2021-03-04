@@ -8,6 +8,6 @@ namespace ClubhouseDotNet
         public Channel[] Channels { get; set; }
 
         [JsonPropertyName("events")]
-        public ChannelEvents[] Events { get; set; }
+        public ChannelEvent[] Events { get; set; }
     }
 }
