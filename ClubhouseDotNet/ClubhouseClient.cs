@@ -65,17 +65,76 @@ namespace ClubhouseDotNet
                 .Content.ReadFromJsonAsync<GetEventsResponse>();
         }
 
-        public async Task<GetEventResponse> GetEventAsync(long eventId)
+        public async Task<GetEventResponse> GetEventAsync(long? eventId = null, string eventHashId = null)
         {
-            var response = await _client.PostAsJsonAsync("/api/get_event", new
-            {
-                event_id = eventId
-            });
+            if (eventId == null && eventHashId == null)
+                throw new ArgumentException($"Either {nameof(eventId)} or {nameof(eventHashId)} should be specified", nameof(eventId));
 
-            var x = await response.Content.ReadAsStringAsync();
+            var response = await _client.PostAsJsonAsync("/api/get_event", new EventRequest
+            {
+                EventId = eventId,
+                EventHashId = eventHashId
+            });
 
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<GetEventResponse>();
+        }
+
+        public async Task<CreateEventResponse> CreateEventAsync(string name, string description, DateTimeOffset startTime, long[] userIds, long? clubId = null, bool isMemberOnly = false)
+        {
+            var response = await _client.PostAsJsonAsync("/api/create_event",
+                new EditEventRequest
+                {
+                    UserIds = userIds, 
+                    ClubId = clubId,
+                    IsMemberOnly = isMemberOnly,
+                    Name = name,
+                    Description = description,
+                    TimeStartEpoch = startTime.ToUnixTimeSeconds(),
+                    EventId = default,
+                    EventHashId = default
+                });
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<CreateEventResponse>();
+        }
+
+        public async Task<ClubhouseResponse> EditEventAsync(string name, string description, DateTimeOffset startTime, long[] userIds, long? eventId = null, string eventHashId = null, long? clubId = null, bool isMemberOnly = false)
+        {
+            if (eventId == null && eventHashId == null)
+                throw new ArgumentException($"Either {nameof(eventId)} or {nameof(eventHashId)} should be specified", nameof(eventId));
+
+            var response = await _client.PostAsJsonAsync("/api/edit_event",
+                new EditEventRequest
+                {
+                    UserIds = userIds, 
+                    ClubId = clubId,
+                    IsMemberOnly = isMemberOnly,
+                    Name = name,
+                    Description = description,
+                    TimeStartEpoch = startTime.ToUnixTimeSeconds(),
+                    EventId = eventId,
+                    EventHashId = eventHashId
+                });
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<ClubhouseResponse>();
+        }
+
+        public async Task<ClubhouseResponse> DeleteEventAsync(long? eventId = null, string eventHashId = null)
+        {
+            if (eventId == null && eventHashId == null)
+                throw new ArgumentException($"Either {nameof(eventId)} or {nameof(eventHashId)} should be specified", nameof(eventId));
+
+            var response = await _client.PostAsJsonAsync("/api/delete_event",
+                new EventRequest
+                {
+                    EventId = eventId,
+                    EventHashId = eventHashId
+                });
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
 
         public async Task<ChannelList> GetChannelsAsync()
