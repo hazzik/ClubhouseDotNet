@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace ClubhouseDotNet
 {
-    public class ChannelEvent
+    public class Event
     {
         [JsonPropertyName("event_id")]
         public long EventId { get; set; }
@@ -18,7 +18,7 @@ namespace ClubhouseDotNet
         public DateTimeOffset TimeStart { get; set; }
 
         [JsonPropertyName("club")]
-        public object Club { get; set; }
+        public Club Club { get; set; }
 
         [JsonPropertyName("is_member_only")]
         public bool IsMemberOnly { get; set; }
@@ -30,9 +30,15 @@ namespace ClubhouseDotNet
         public EventHost[] Hosts { get; set; }
 
         [JsonPropertyName("channel")]
-        public object Channel { get; set; }
+        public string Channel { get; set; }
 
         [JsonPropertyName("is_expired")]
         public bool IsExpired { get; set; }
+
+        [JsonPropertyName("club_is_member")]
+        public int? ClubIsMember { get; set; }
+
+        [JsonPropertyName("club_is_follower")]
+        public int? ClubIsFollower { get; set; }
     }
 }

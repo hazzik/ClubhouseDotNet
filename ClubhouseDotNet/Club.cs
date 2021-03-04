@@ -40,5 +40,8 @@ namespace ClubhouseDotNet
 
         [JsonPropertyName("num_online")]
         public long NumOnline { get; set; }
+
+        [JsonPropertyName("is_admin")]
+        public int? IsAdmin { get; set; }
     }
 }

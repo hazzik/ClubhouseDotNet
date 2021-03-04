@@ -56,6 +56,14 @@ namespace ClubhouseDotNet
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
 
+        public async Task<GetEventsResponse> GetEventsAsync()
+        {
+            var response = await _client.GetAsync("/api/get_events");
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<GetEventsResponse>();
+        }
+
         public async Task<ChannelList> GetChannelsAsync()
         {
             var response = await _client.GetAsync("/api/get_channels");
