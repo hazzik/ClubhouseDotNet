@@ -465,5 +465,13 @@ namespace ClubhouseDotNet
             return await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<ClubhouseResponse>();
         }
+
+        public async Task<GetReleaseNotesResponse> GetReleaseNotesAsync()
+        {
+            var response = await _client.PostAsJsonAsync("/api/get_release_notes", new { });
+
+            return await response.EnsureSuccessStatusCode()
+                .Content.ReadFromJsonAsync<GetReleaseNotesResponse>();
+        }
     }
 }
